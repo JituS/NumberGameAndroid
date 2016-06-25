@@ -7,6 +7,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
+import java.util.List;
 
 import static java.util.Arrays.asList;
 
@@ -26,9 +27,16 @@ public class NumberGame {
 	}
 
 
+	public List<Integer> addInList(int from, int to, List<Integer> list) {
+		for(int i = from; i <= to; i++) {
+			list.add(i);
+		}
+		return list;
+	}
+
 	public void initialize() {
-		ArrayList<Integer> shuffledNumbers = shuffle(new ArrayList<>(asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12)));
-		ArrayList<Integer> nextNumbers = new ArrayList<>(asList(13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40));
+		List<Integer> shuffledNumbers = shuffle(addInList(1, 12, new ArrayList<Integer>()));
+		List<Integer> nextNumbers = addInList(13, maxLimit, shuffledNumbers);
 		shuffledNumbers.addAll(nextNumbers);
 		this.numbersToShow = shuffledNumbers.iterator();
 	}
@@ -86,7 +94,7 @@ public class NumberGame {
 		}
 	}
 
-	protected ArrayList<Integer> shuffle(ArrayList<Integer> numbers) {
+	protected ArrayList<Integer> shuffle(List<Integer> numbers) {
 		ArrayList<Integer> integers = new ArrayList<>();
 		for (int i = numbers.size() - 1; i >= 0; i--) {
 			int random = (int) Math.round(Math.random() * i);
